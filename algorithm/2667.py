@@ -49,3 +49,58 @@ house_cnt_list.sort()
 print(village)
 for i in house_cnt_list:
   print(i)
+
+# bfs
+from collections import deque
+
+# 하, 상, 우, 좌
+dx = [+1, -1, 0, 0]
+dy = [0 , 0, +1, -1]
+
+house_cnt = 0
+house_cnt_list=[]
+village = 0
+
+def bfs(x, y):
+  queue = deque()
+  queue.append((x, y))
+  graph[x][y] = 0
+  global house_cnt
+  house_cnt = house_cnt + 1
+
+  while queue:
+    x, y = queue.popleft()
+
+    for i in range(4):
+      nx = x + dx[i]
+      ny = y + dy[i]
+
+      if nx < 0 or nx >= n or ny < 0 or ny >= n:
+        continue
+      if graph[nx][ny] == 1:
+        graph[nx][ny] = 0
+        queue.append((nx, ny))
+        house_cnt += 1
+
+
+n = int(input())
+graph = []
+for i in range(n):
+  graph.append(list(map(int, input())))
+
+
+for i in range(n):
+  for j in range(n):
+    if graph[i][j] == 1:
+      bfs(i, j)
+      village +=1
+      house_cnt_list.append(house_cnt)
+      house_cnt = 0
+
+# 단지 내 집의 수를 오름차순으로 정렬하기
+house_cnt_list.sort()
+
+print(village)
+for i in house_cnt_list:
+  print(i)
+
