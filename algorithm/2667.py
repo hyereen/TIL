@@ -19,10 +19,12 @@ def dfs(x, y):
   global house_cnt
   if x<= -1 or x>=n or y<=-1 or y >=n:
     return False
-  if graph[x][y] == 1: # 1이 집이 있는 곳이니까 여기를 카운트해야함
+  # 이게 틀린거 
+  #if (0 <= x < n) and (0<= y < n):
+   if graph[x][y] == 1: # 1이 집이 있는 곳이니까 여기를 카운트해야함
     graph[x][y] = 0 # 집을 셌으면 0으로 바꿔줘서 방문할 필요없도록
     house_cnt += 1
-    dfs(x-1, y) #  상
+    dfs(x-1, y) # 상
     dfs(x, y-1) # 좌
     dfs(x+1, y) # 하
     dfs(x, y+1) # 우
@@ -49,6 +51,8 @@ house_cnt_list.sort()
 print(village)
 for i in house_cnt_list:
   print(i)
+
+
 
 # bfs
 from collections import deque
@@ -104,3 +108,56 @@ print(village)
 for i in house_cnt_list:
   print(i)
 
+# bfs
+from collections import deque
+
+# 하, 상, 우, 좌
+dx = [+1, -1, 0, 0]
+dy = [0 , 0, +1, -1]
+
+house_cnt = 0
+house_cnt_list=[]
+village = 0
+
+def bfs(x, y):
+  queue = deque()
+  graph[x][y] = 0 # 처음 x,y에 대해서 방문처리해주기
+  queue.append((x, y))
+  global house_cnt
+
+  while queue:
+    x, y = queue.popleft()
+    house_cnt += 1
+
+    for i in range(4):
+      nx = x + dx[i]
+      ny = y + dy[i]
+
+      # 마을 안의 경우만 한다 
+      if 0 <= nx and nx < n and 0<= ny and ny < n:
+        if graph[nx][ny] == 1:
+          graph[nx][ny] = 0
+          queue.append((nx, ny))
+          #house_cnt +=1
+
+
+n = int(input())
+graph = []
+for i in range(n):
+  graph.append(list(map(int, input())))
+
+
+for i in range(n):
+  for j in range(n):
+    if graph[i][j] == 1:
+      bfs(i, j)
+      village +=1
+      house_cnt_list.append(house_cnt)
+      house_cnt = 0
+
+# 단지 내 집의 수를 오름차순으로 정렬하기
+house_cnt_list.sort()
+
+print(village)
+for i in house_cnt_list:
+  print(i)
