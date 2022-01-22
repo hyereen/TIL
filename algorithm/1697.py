@@ -12,25 +12,23 @@ Original file is located at
 
 from collections import deque
 
-n, k = map(int, input().split())
-speed = 0
-
 def bfs(n, k):
+  global MAX
   queue = deque()
   queue.append(n)
-  global speed
 
   while queue:
     now = queue.popleft()
     if now == k:
-      print(now)
       print(dist[now])
       break
-    for nx in (now-1, now+1, now*2):
-      if 0 <= nx <= MAX and not dist[nx]:
+    for nx in (now-1, now+1, now*2): #
+      if 0 <= nx <= MAX and not dist[nx]: #
         dist[nx] = dist[now] + 1
         queue.append(nx)
 
-MAX = 10000
+MAX = 100001 # 인덱스에러 해결 
 dist = [0] * (MAX+1)
+
+n, k = map(int, input().split())
 bfs(n, k)
