@@ -1,9 +1,14 @@
-n = int(input())
-num_list = list(map(int, input().split()))
-num_list = sorted(num_list)
+t = int(input())
 
-if n == 1:
-    a = num_list[0] * num_list[0]
-else:
-    a = num_list[0] * num_list[n-1]
-print(a)
+for i in range(t):
+    n = int(input())
+    n_list = list(format(n, 'b'))
+    n_list = list(reversed(n_list))
+    idx = []
+    for j in range(len(n_list)):
+        if n_list[j] == '1':
+            idx.append(j)
+
+    for k in idx:
+        print(k, end=' ')
+
