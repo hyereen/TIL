@@ -10,5 +10,5 @@ def solution(prices):
           else: # 가격이 떨어지는 경우는
               sec +=1 # 1초동안은 유지되었으므로 1을 더해주고
               break # 반복을 멈추고
-      answer.append(sec) # 결과 리스트에 저장해준다 
+      answer.append(sec) # 결과 리스트에 저장해준다
     return answer
