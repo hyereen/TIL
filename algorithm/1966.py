@@ -1,4 +1,3 @@
-# https://programmers.co.kr/learn/courses/30/lessons/42587
 
 def solution(priorities, location):
   answer = 0
@@ -11,3 +10,11 @@ def solution(priorities, location):
         max_num = max(priorities) # 최댓값 프린트했으니까 다시 나머지 중에서 최댓값을 구함
         if i == location:
           return answer
+
+t = int(input())
+
+for i in range(t):
+  n, location = map(int, input().split())
+  priorities = list(map(int, input().split()))
+  ans = solution(priorities, location)
+  print(ans)
