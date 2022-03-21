@@ -32,3 +32,65 @@ dist = [0] * (MAX+1)
 
 n, k = map(int, input().split())
 bfs(n, k)
+# ===============================================================
+# 220321
+# 메모리 초과
+from collections import deque
+
+n, k = map(int, input().split())
+
+
+def bfs(n):
+  global k
+  queue = deque()
+  queue.append((n, 0))
+
+  while queue:
+    # print(queue)
+    cur_x, cur_idx = queue.popleft()
+
+    if cur_x == k:
+      print(cur_idx)
+      break
+
+    queue.append((cur_x - 1, cur_idx + 1))
+    queue.append((cur_x + 1, cur_idx + 1))
+    queue.append((cur_x * 2, cur_idx + 1))
+
+
+bfs(n)
+
+
+# ===============================================================
+# 220321
+# 메모리 초과 해결
+# visited 를 만들어줘서 이미 방문했던 숫자에는 다시 큐에 넣지 않도록
+
+from collections import deque
+
+n, k = map(int, input().split())
+
+
+def bfs(n):
+  global k
+  queue = deque()
+  queue.append(n)
+  visited = [0] * 100001
+  visited[n] = 1
+
+  while queue:
+    #print(queue)
+    cur_x = queue.popleft()
+
+    if cur_x == k:
+      print(visited[cur_x] - 1)
+      break
+
+    for i in [cur_x - 1, cur_x + 1, cur_x * 2]:
+      if 0 <= i <= 100000:
+        if not visited[i]:
+          visited[i] = visited[cur_x] + 1
+          queue.append(i)
+
+
+bfs(n)
