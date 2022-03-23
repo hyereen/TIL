@@ -94,3 +94,31 @@ def bfs(n):
 
 
 bfs(n)
+
+# ===============================================================
+# 220323
+# 큐사이즈로 풀기!!
+from collections import deque
+n, k = map(int, input().split())
+
+def bfs():
+  ans = 0
+  queue = deque()
+  queue.append(n)
+  visited = [0] * 100001
+  visited[n] = 1
+
+  while queue:
+    qsize = len(queue)
+    ans += 1
+    for i in range(qsize):
+       cur_x = queue.popleft()
+       if cur_x == k:
+         return ans
+       for x in [cur_x -1, cur_x+1, cur_x*2]:
+        if 0<= x <= 100000 and visited[x] == 0:
+            queue.append(x)
+            visited[x] = 1
+
+test = bfs()
+print(test)
