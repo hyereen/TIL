@@ -16,7 +16,7 @@ for i in range(n):
 # 두 팀으로 나눌 경우의 수를 저장할 리스트
 player_cases = []
 
-# dfs로 조합구하기 => 기억하기 !! 
+# dfs로 조합구하기 => 기억하기 !!
 # idx: depth
 # list: 하나의 경우의 조합을 저장해둘 리스트
 # lst: 조합을 구할 리스트
