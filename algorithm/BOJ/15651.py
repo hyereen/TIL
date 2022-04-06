@@ -11,7 +11,7 @@ chosen = []
 # 중복순열 숫자는 중복되도 되는데, 순서가 다르면 다른 경우
 # visit check 안함 => 한 케이스에서 같은 숫자 나옴
 # 넘길때 숫자 전체를 넘김 => 순서가 다르면 다른 경우로 보니까
-def comb(pool, r):
+def perm(pool, r):
     global chosen
     print(chosen)
     if len(chosen) == r:
@@ -22,7 +22,7 @@ def comb(pool, r):
 
     for i in range(len(pool)):
         chosen.append(pool[i])
-        comb(pool, r)
+        perm(pool, r)
         chosen.pop()
 
-comb(pool, m)
+perm(pool, m)
