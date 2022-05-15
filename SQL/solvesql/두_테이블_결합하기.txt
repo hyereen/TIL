@@ -1,0 +1,9 @@
+-- https://solvesql.com/problems/join/
+-- distinct 해야 함 !!!!
+
+select
+  distinct(athlete_id)
+from
+  events as E join records as R on R.event_id = E.id
+where
+  sport = 'Golf';
