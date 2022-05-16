@@ -1,0 +1,22 @@
+-- https://solvesql.com/problems/multiple-medalist/
+-- teams 테이블 설명에 team 컬럼을 팀 이름으로 해뒀는데, 팀 이름이 아니라 국가명 이었으면 더 문제를 이해하기 쉬웠을 것 같다
+select
+  A.name
+from
+  games as G,
+  records as R,
+  teams as T,
+  athletes as A
+where
+  G.year >= 2000 -- 2000년 이후의 메달 수상 기록만 고려
+  and R.medal in ('Gold', 'Silver', 'Bronze') -- 메달을 수상한
+  and G.id = R.game_id -- 개최년도를 알기 위해
+  and T.id = R.team_id -- 선수의 참가 국적을 알기 위해 
+  and A.id = R.athlete_id -- 선수의 이름을 알기 위해
+group by
+  R.athlete_id,
+  A.name
+having
+  count(distinct(T.team)) >= 2 -- 2개 이상의 국적
+order by
+  A.name asc;
