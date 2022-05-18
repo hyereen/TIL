@@ -1,4 +1,4 @@
-import sys
+# https://softeer.ai/practice/info.do?eventIdx=1&psProblemId=623
 
 M, N, K = map(int, input().split())
 
