@@ -1,0 +1,7 @@
+-- https://solvesql.com/problems/settled-sellers-1/
+-- order_id가 여러개 있어서 distinct 해줘야 한다 
+
+select seller_id, count(distinct order_id) as orders
+from olist_order_items_dataset
+group by seller_id
+having orders >= 100
