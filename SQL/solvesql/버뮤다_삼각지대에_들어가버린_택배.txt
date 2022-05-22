@@ -1,0 +1,23 @@
+-- https://solvesql.com/problems/shipment-in-bermuda/
+-- mysql에는 year(), month()함수가 있지만 sqlite에는 없음
+-- 그래서 like를 이용해서 2017년 1월의 데이터만 뽑았다
+
+select
+  temp.delivered_carrier_date,
+  count(temp.order_id) as orders
+from
+  (
+    select
+      order_id,
+      date(order_delivered_carrier_date) as delivered_carrier_date
+    from
+      olist_orders_dataset
+    where
+      order_delivered_carrier_date is not null
+      and order_delivered_customer_date is null
+      and delivered_carrier_date LIKE '2017-01%'
+  ) as temp
+group by
+  temp.delivered_carrier_date
+order by
+  temp.delivered_carrier_date
