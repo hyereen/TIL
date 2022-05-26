@@ -1,0 +1,19 @@
+-- https://solvesql.com/problems/daily-arppu/
+
+select
+  substr(ord_date.order_purchase_timestamp, 1, 10) as dt,
+  count(distinct ord_date.customer_id) as pu, -- 결제 고객 수
+  round(sum(ord_pay.payment_value), 2) as revenue_daily,
+  round(
+    sum(ord_pay.payment_value) / count(distinct ord_date.customer_id),
+    2
+  ) as arppu -- Average Revenue Per Paying User의 약자로, 결제 고객 1인 당 평균 결제 금액을 의미, 전체 매출액을 결제 고객 수로 나눔
+from
+  olist_orders_dataset as ord_date
+  left join olist_order_payments_dataset as ord_pay on ord_date.order_id = ord_pay.order_id
+group by
+  dt
+having
+  dt >= '2018-01-01'
+order by
+  dt asc
