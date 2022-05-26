@@ -1,0 +1,17 @@
+-- https://solvesql.com/problems/olist-daily-revenue/
+-- sqlite에는 datetime 타입이 없다
+-- 그럼에도 은근히 쉽게 날짜 비교 가능!
+-- 숫자 비교가 아니라 알파벳 비교이지만 이와 같은 일관된 형식의 날짜는 숫자뿐만 아니라 알파벳 순으로 정렬되기 때문
+
+select
+  substr(ord_date.order_purchase_timestamp, 1, 10) as dt, -- 매출 날짜 (예: 2018-01-01)
+  round(sum(ord_pay.payment_value), 2) as revenue_daily -- 해당 날짜의 매출액
+from
+  olist_orders_dataset as ord_date
+  left join olist_order_payments_dataset as ord_pay on ord_date.order_id = ord_pay.order_id
+group by
+  dt
+having
+  dt >= '2018-01-01' -- 2018년 1월 1일 이후
+order by
+  dt asc --  매출 날짜 기준으로 오름차순 정렬
