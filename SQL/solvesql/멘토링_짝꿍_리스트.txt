@@ -1,0 +1,18 @@
+-- https://solvesql.com/problems/mentor-mentee-list/
+-- DATE(날짜, modifier) 이용 
+
+select
+  e1.employee_id as mentee_id,
+  e1.name as mentee_name,
+  e2.employee_id as mentor_id,
+  e2.name as mentor_name
+from
+  employees e1,
+  employees e2
+where
+  e1.join_date between DATE('2021-12-31', '-3 months')
+  and '2021-12-31' --  멘티가 될 신규 입사자들은 ‘2021년 12월 31일’을 기준으로 3개월 이내 입사한 인원 전체
+  and e2.join_date <= DATE('2021-12-31', '-2 years') -- 멘토는 ‘2021년 12월 31일’을 기준으로 재직한지 2년 이상
+  and e1.department != e2.department
+order by
+  mentor_id
