@@ -1,0 +1,22 @@
+-- https://solvesql.com/problems/estimated-delivery-date/
+
+select
+  date(order_purchase_timestamp) as purchase_date,
+  count(
+    case
+      when order_delivered_customer_date < order_estimated_delivery_date then order_id
+    end
+  ) as success,
+  count(
+    case
+      when order_delivered_customer_date >= order_estimated_delivery_date then order_id
+    end
+  ) as fail
+from
+  olist_orders_dataset
+where
+  order_purchase_timestamp between '2017-01-01' and '2017-02-01' -- A이상 B미만으로 작동하는듯 해B를 2017-01-31이 아닌 2017-02-01로 했음.. 근데 인터넷 찾아보면 B이하인데.. ..?
+group by
+  purchase_date
+order by
+  purchase_date
