@@ -1,0 +1,26 @@
+-- https://solvesql.com/problems/high-season-of-restaurant/
+
+select
+  tips.*
+from
+  tips,
+  (
+    select
+      day
+    from
+      tips
+    group by
+      day
+    having
+      sum(total_bill) >= 1500
+  ) as days
+where
+  tips.day = days.day
+  
+  
+-- 다른 풀이
+-- select *
+-- from tips
+-- where day in (
+-- 	select day from tips group by day having sum(total_bill) >= 1500
+-- )
