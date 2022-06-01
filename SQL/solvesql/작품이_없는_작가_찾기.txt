@@ -1,0 +1,8 @@
+-- https://solvesql.com/problems/artists-without-artworks/
+-- artists 테이블에는 MoMA에 등록된 작가들의 정보가 있고, artworks_artists 테이블에는 각 작품에 참여한 작가들의 정보가 들어있으므로 artists 기준으로 left join 하면 MoMA에 등록된 작품이 없는 작가가 나올 것! 
+
+SELECT artists.artist_id
+     , artists.name
+FROM artists
+LEFT JOIN artworks_artists ON artworks_artists.artist_id = artists.artist_id
+WHERE death_year is not null AND artwork_id is null
