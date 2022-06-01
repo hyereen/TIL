@@ -1,0 +1,11 @@
+-- https://solvesql.com/problems/sales-summary/
+-- 제목이 요일별 매출 요약이어서 맨 처음 풀이처럼 group by 요일로 해서 푸는건줄 알았는데.. 제출해보니 틀렸고, 정답의 row가 하나라는 힌트를 통해서 아래처럼 풀었더니 맞았다. 그럼 제목을 저런식으로 표현하면 안되지 않나..? 레스토랑의 총 매출 평균 이정도가..되야할 것 같다. 
+
+select round(sum(total_bill)/4,2)
+from tips
+
+
+-- 맨처음 풀이
+select day, round(avg(total_bill),2)
+from tips
+group by day
