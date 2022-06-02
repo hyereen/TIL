@@ -1,0 +1,15 @@
+-- https://solvesql.com/problems/installment-month/
+-- 문제를 잘 읽자! where 조건을 빼먹어서 계속 이상한거만 고쳤다.
+
+select
+  payment_installments,
+  count(distinct order_id) as order_count,
+  min(payment_value) as min_value,
+  max(payment_value) as max_value,
+  avg(payment_value) as avg_value
+from
+  olist_order_payments_dataset
+where
+  payment_type = 'credit_card' -- 신용카드로 주문한 내역을
+group by
+  payment_installments -- 할부 개월 수 별로 나누어 살펴보려고
