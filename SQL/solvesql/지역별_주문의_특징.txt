@@ -1,0 +1,37 @@
+/* https://solvesql.com/problems/characteristics-of-orders/ */
+
+SELECT
+  REGION AS "Region", /*주문 지역*/
+  (
+    SELECT
+      COUNT(DISTINCT ORDER_ID)
+    FROM
+      RECORDS A
+    WHERE
+      Z.REGION = A.REGION
+      AND CATEGORY = 'Furniture'
+  ) AS Furniture, /*해당 지역 내 가구(’Furniture’) 주문 수*/
+  (
+    SELECT
+      COUNT(DISTINCT ORDER_ID)
+    FROM
+      RECORDS A
+    WHERE
+      Z.REGION = A.REGION
+      AND CATEGORY = 'Office Supplies'
+  ) AS "Office Supplies", /* 해당 지역 내 오피스 물품(’Office Supplies’) 주문 수 */
+  (
+    SELECT
+      COUNT(DISTINCT ORDER_ID)
+    FROM
+      RECORDS A
+    WHERE
+      Z.REGION = A.REGION
+      AND CATEGORY = 'Technology'
+  ) AS Technology /* 해당 지역 내 전자기기(’Technology’) 주문 수 */
+FROM
+  RECORDS Z
+GROUP BY
+  REGION
+ORDER BY
+  REGION;
