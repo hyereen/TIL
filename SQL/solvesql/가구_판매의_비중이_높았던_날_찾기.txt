@@ -1,0 +1,32 @@
+/* https://solvesql.com/problems/day-of-furniture/ */
+
+SELECT
+  order_date AS "order_date",
+  furniture, /*  Furniture 카테고리 주문 */
+  ROUND((furniture * 1.0 / ALL_ORDERS * 100), 2) AS furniture_pct /*  해당 일의 전체 주문 대비 Furniture 카테고리 주문의 비율 (%) */
+FROM
+  (
+    SELECT
+      ORDER_DATE,
+      COUNT(DISTINCT ORDER_ID) ALL_ORDERS, /* 해당 일의 전체 주문 */
+      (
+        SELECT
+          COUNT(DISTINCT ORDER_ID)
+        FROM
+          RECORDS A
+        WHERE
+          CATEGORY = 'Furniture'
+          AND A.ORDER_DATE = Z.ORDER_DATE
+      ) AS furniture /* Furniture 카테고리 주문 */
+    FROM
+      RECORDS Z
+    GROUP BY
+      ORDER_DATE
+    HAVING
+      ALL_ORDERS >= 10
+  )
+WHERE
+  ROUND((furniture * 1.0 / ALL_ORDERS * 100), 2) >= 40
+ORDER BY
+  ROUND((furniture * 1.0 / ALL_ORDERS * 100), 2) DESC,
+  ORDER_DATE;
