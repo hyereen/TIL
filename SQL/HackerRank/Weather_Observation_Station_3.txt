@@ -1,0 +1,6 @@
+/* https://www.hackerrank.com/challenges/weather-observation-station-3/problem?isFullScreen=true&h_r=next-challenge&h_v=zen */
+
+
+select distinct city /* exclude duplicates from the answer */
+from station
+where id % 2 = 0 /* have an even ID number */
