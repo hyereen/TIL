@@ -1,0 +1,36 @@
+/* https://www.hackerrank.com/challenges/weather-observation-station-5/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen */
+/* 하나의 select 문으로 해결해야하는 줄 알았는데, 반드시 그럴 필요는 없었다! */ 
+
+select
+  city,
+  length(city)
+from /* find the shortest city name */
+  (
+    select
+      city,
+      length(city)
+    from
+      station
+    order by
+      length(city),
+      city /* choose the one that comes first when ordered alphabetically */
+  ) as t1
+limit
+  1;
+
+select
+  city,
+  length(city)
+from /* find the longest city name */
+  (
+    select
+      city,
+      length(city)
+    from
+      station
+    order by
+      length(city) desc, 
+      city /* choose the one that comes first when ordered alphabetically */
+  ) as t1
+limit
+  1;

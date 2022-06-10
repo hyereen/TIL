@@ -1,0 +1,9 @@
+/* https://www.hackerrank.com/challenges/weather-observation-station-6/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen */
+/* in 뒤에 대문자가 아니라 소문자여도 같은 결과가 나온다. */
+
+select
+  distinct city /* cannot contain duplicates */
+from
+  station
+where
+  substr(city, 1, 1) in ('A', 'E', 'I', 'O', 'U'); /* CITY names starting with vowels (i.e., a, e, i, o, or u) */
