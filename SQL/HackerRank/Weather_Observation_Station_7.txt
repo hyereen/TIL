@@ -1,0 +1,17 @@
+/* https://www.hackerrank.com/challenges/weather-observation-station-7/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen */
+/* 글자열 자를때 left, right함수 사용하면 왼쪽부터, 오른쪽 부터 개수만큼 짤라준다 */
+
+select
+  distinct city /* cannot contain duplicates */
+from
+  station
+where
+  substr(city, length(city), 1) in ('A', 'E', 'I', 'O', 'U'); /* CITY names ending with vowels (a, e, i, o, u) */
+
+/* 또 다른 풀이 */
+select
+  distinct city /* cannot contain duplicates */
+from
+  station
+where
+  right(city, 1) in ('A', 'E', 'I', 'O', 'U'); /* CITY names ending with vowels (a, e, i, o, u) */
