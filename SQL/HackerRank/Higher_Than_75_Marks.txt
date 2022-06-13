@@ -1,0 +1,9 @@
+/* */
+/* distinct name을 했더니 아래와 같은 에러가 났다. */
+/* ERROR 3065 (HY000) at line 1: Expression #2 of ORDER BY clause is not in SELECT list, references column */
+/* mysql 다른 버전에서는 에러가 안나기도 한다는데.. 음..http://home.zany.kr:9003/board/bView.asp?bCode=18&aCode=13492 */
+
+select name
+from students
+where marks > 75 
+order by right(name, 3), id;
