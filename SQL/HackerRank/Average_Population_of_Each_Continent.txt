@@ -1,0 +1,8 @@
+/* https://www.hackerrank.com/challenges/average-population-of-each-continent/problem?isFullScreen=true&h_r=next-challenge&h_v=zen */
+/* mysql에서 truncate는 버림함수 truncate(숫자, 버림할 자리수) */
+/* ex. round(34.5678, 1)이면 34.6이고 truncate(34.5678, 1)이면 34.5 */
+
+select country.continent, truncate(avg(city.population),0) /* average city populations (CITY.Population) rounded down to the nearest integer. */
+from city join country
+on city.countrycode = country.code
+group by country.continent
