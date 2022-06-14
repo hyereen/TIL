@@ -1,0 +1,16 @@
+-- https://www.hackerrank.com/challenges/the-report/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen 
+
+
+SELECT IF(g.grade < 8, NULL, s.name)
+     , g.grade
+     , s.marks
+FROM students s JOIN grades g on s.marks BETWEEN g.min_mark AND g.max_mark
+ORDER BY g.grade DESC, s.name, s.marks 
+
+
+-- 조건
+-- 1. grade 8 미만이면 null
+-- 2. join의 on에 between을 이용해서 mark에 따른 grade 
+-- 3. 기본적으로 grade 내림차순
+-- 4. grade가 같으면(grade가 8~10인 경우) 이름 알파벳순
+-- 5. name이 null인 경우(grade가 1~7인 경우) marks 오름차순 
