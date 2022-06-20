@@ -1,0 +1,20 @@
+/* https://www.hackerrank.com/challenges/the-pads/problem?isFullScreen=true */
+
+/* 1. Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a parenthetical */
+SELECT
+    CONCAT (name, '(', SUBSTR(occupation, 1, 1), ')')
+FROM
+    occupations
+ORDER BY
+    name;
+
+/* 2. Query the number of ocurrences of each occupation in OCCUPATIONS */
+SELECT
+    CONCAT('There are a total of ', COUNT(occupation), ' ', LOWER(occupation), 's.')
+FROM
+    occupations
+GROUP BY
+    occupation
+ORDER BY 
+    COUNT(occupation)
+    , occupation
