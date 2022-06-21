@@ -1,0 +1,10 @@
+/* https://www.hackerrank.com/challenges/occupations/problem?isFullScreen=true */
+/* group by를 위해서 집계함수를 쓴거여서 min, max 상관 없음 */
+
+SELECT 
+    max(CASE WHEN OCCUPATION = 'DOCTOR' THEN NAME ELSE NULL END) ,
+    max(CASE WHEN OCCUPATION = 'PROFESSOR' THEN NAME ELSE NULL END) ,
+    max(CASE WHEN OCCUPATION = 'SINGER' THEN NAME ELSE NULL END) ,
+    max(CASE WHEN OCCUPATION = 'ACTOR' THEN NAME ELSE NULL END)
+FROM (SELECT OCCUPATION, NAME, ROW_NUMBER() OVER (PARTITION BY OCCUPATION ORDER BY NAME) rn FROM OCCUPATIONS) as tmp
+GROUP BY tmp.rn
