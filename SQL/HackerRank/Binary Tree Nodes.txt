@@ -1,0 +1,9 @@
+/* https://www.hackerrank.com/challenges/binary-search-tree-1/problem?isFullScreen=true */
+/* in 뒤에는 select한 컬럼이 나와야 한다 */
+
+select N, (
+case when P is null then 'Root'
+when N not in (select distinct P from BST where P is not null) then 'Leaf'
+else 'Inner' end) as node
+from BST
+order by N;
