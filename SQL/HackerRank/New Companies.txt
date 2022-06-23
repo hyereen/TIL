@@ -1,0 +1,15 @@
+/* https://www.hackerrank.com/challenges/the-company/problem?isFullScreen=true&h_r=next-challenge&h_v=zen */
+
+select C.company_code
+      , C.founder
+      , count(distinct LM.lead_manager_code)
+      , count(distinct SM.senior_manager_code)
+      , count(distinct M.manager_code)
+      , count(distinct E.employee_code)
+ from company as C 
+      left join lead_manager as LM on C.company_code = LM.company_code
+      left join senior_manager as SM on LM.lead_manager_code = SM.lead_manager_code
+      left join Manager as M on SM.senior_manager_code = M.senior_manager_code
+      left join employee as E on M.manager_code = E.manager_code
+group by C.company_code, C.founder
+order by C.company_code
