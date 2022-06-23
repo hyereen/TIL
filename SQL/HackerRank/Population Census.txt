@@ -1,0 +1,6 @@
+/* https://www.hackerrank.com/challenges/asian-population/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen */
+/* sum(country.population)하면 continent의 population을 계속 더하기 때문에 안된다. */ 
+
+select sum(city.population)
+from city right join country on city.countrycode = country.code
+where continent = 'Asia'
