@@ -1,0 +1,5 @@
+/* https://www.hackerrank.com/challenges/weather-observation-station-18/problem?isFullScreen=true */
+/* Manhattan Distance는 (P1(a,b),P2(c,d)) = (c-a)+(d-b) */
+
+select round(max(lat_n) - min(lat_n) + max(long_w) - min(long_w),4)
+from station
