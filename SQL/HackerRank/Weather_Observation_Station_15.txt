@@ -1,0 +1,16 @@
+/* https://www.hackerrank.com/challenges/weather-observation-station-15/problem?isFullScreen=true&h_r=next-challenge&h_v=zen */
+/* 문제를 잘 읽자.. select할거는 long_w, where 조건은 lat_n */
+
+/* order by 및 limit 사용 */
+select round(long_w, 4)
+from station
+where lat_n < 137.2345
+order by lat_n desc
+limit 1;
+
+/* 서브쿼리 사용 */
+select round(long_w, 4)
+from station
+where lat_n = (select max(lat_n) 
+               from station 
+               where lat_n < 137.2345)
