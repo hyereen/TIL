@@ -1,0 +1,7 @@
+/* https://www.hackerrank.com/challenges/earnings-of-employees/problem?isFullScreen=true */
+/* limit 1안하고 푸는 방법이 궁금했다 !! 다행히 where에 서브쿼리를 써서 해결함 */
+
+SELECT MAX(SALARY*MONTHS), COUNT(*)
+FROM EMPLOYEE
+WHERE (SALARY*MONTHS) = (SELECT MAX(SALARY*MONTHS)
+                         FROM EMPLOYEE);
