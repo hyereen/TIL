@@ -1,0 +1,13 @@
+/* https://www.hackerrank.com/challenges/weather-observation-station-20/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen */
+
+/* Oracle: median 함수 이용 */
+
+SELECT ROUND(MEDIAN(LAT_N),4)
+FROM STATION;
+
+/* MySQL: median 함수 없음, 대신 백분위 순위 이용 */
+
+SELECT ROUND(LAT_N,4)
+FROM (SELECT LAT_N, PERCENT_RANK() OVER (ORDER BY LAT_N ASC) percent
+      FROM STATION) A
+WHERE percent=0.5;
