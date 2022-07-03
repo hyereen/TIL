@@ -1,0 +1,12 @@
+/* https://www.hackerrank.com/challenges/contest-leaderboard/problem?isFullScreen=true */
+/* 가장 안쪽 서브쿼리에서는 각 문제별 최고값(같은 문제를 여러번 푼 경우가 있기 때문)을 뽑고, 그 다음 큰 서브쿼리에서는 각 문제별 최고점수의 합, 즉 개인별 점수 합을 계산, inner join은 아이디별 이름을 출력하기 위해 사용*/
+
+SELECT H.hacker_id, H.name, sub2.total_score
+FROM (SELECT sub.hacker_id, SUM(max_score) AS total_score
+      FROM (SELECT hacker_id, challenge_id, MAX(score) AS max_score
+            FROM Submissions 
+            GROUP BY hacker_id, challenge_id) sub
+      GROUP BY sub.hacker_id
+      HAVING total_score != 0) sub2
+ INNER JOIN Hackers H ON sub2.hacker_id = H.hacker_id
+ORDER BY sub2.total_score DESC, H.hacker_id
