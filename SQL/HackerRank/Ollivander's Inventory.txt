@@ -1,0 +1,15 @@
+/* https://www.hackerrank.com/challenges/harry-potter-and-wands/problem?isFullScreen=true */
+/* Wands 테이블에서 같은 code, power를 가지면서 가장 싼 wand 찾기 */ 
+/* 위의 서브쿼리 테이블과 Wands 테이블을 다시 join 해서 id 찾기 */
+/* Wands_property와 join해서 age 가져오기 */ 
+
+SELECT w.id, wp.age, w.coins_needed, w.power
+FROM (SELECT code, min(coins_needed) as min_coins, power
+      FROM wands
+      GROUP BY code, power) as w_m
+JOIN wands as w on w_m.code = w.code 
+                    and w_m.min_coins = w.coins_needed
+                    and w_m.power = w.power
+JOIN wands_property as wp on w.code = wp.code
+WHERE wp.is_evil = 0
+ORDER BY w.power desc, wp.age desc;
