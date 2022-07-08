@@ -1,0 +1,7 @@
+/* https://www.hackerrank.com/challenges/draw-the-triangle-1/problem?isFullScreen=true */
+/* mysql에서 =가 set이랑 쓰이면 대입연산자, 그 외 절에서 사용되면 비교연산자(==)가 됨. 그래서 첫번째 줄인 set에서는 =나 :=를 둘다 사용해도 괜찮음 */
+/* 다만 select 절에서는 =를 쓰면 비교연산자로 혼동될 수 있기 때문에 에러가 뜸. 그래서 mysql에서는 :=를 별도로 제공하고 있고, 이는 어느경우에도 반드시 대입연산자를 의미함*/
+
+set @number = 21;
+select repeat('* ', @number := @number - 1) 
+from information_schema.tables;
