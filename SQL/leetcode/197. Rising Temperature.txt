@@ -1,0 +1,7 @@
+/* https://leetcode.com/problems/rising-temperature/ */
+
+select A.id as Id
+from weather A
+join weather B
+on datediff(a.recordDate, B.recordDate) = 1
+and A.temperature > B.temperature
