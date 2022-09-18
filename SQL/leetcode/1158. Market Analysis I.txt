@@ -1,0 +1,11 @@
+/* https://leetcode.com/problems/market-analysis-i/ */
+
+select Users.user_id as buyer_id
+     , Users.join_date 
+     , ifnull(Orders_2019.orders_in_2019, 0) as orders_in_2019
+from Users
+left join (select buyer_id, count(buyer_id) as orders_in_2019
+             from Orders
+            where order_date >= '2019-01-01'
+            group by buyer_id) as Orders_2019
+on Users.user_id = Orders_2019.buyer_id
