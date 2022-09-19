@@ -1,0 +1,14 @@
+/* https://leetcode.com/problems/department-highest-salary/ */
+
+select T2.name as Department
+     , T0.name as Employee
+     , T0.Salary
+from Employee as T0
+inner join (select departmentId
+                 , max(salary) as max_salary
+            from Employee
+            group by departmentId) as T1
+on T0.departmentId = T1.departmentId 
+and T0.salary = T1.max_salary
+left join Department as T2
+on T0.departmentId = T2.id
