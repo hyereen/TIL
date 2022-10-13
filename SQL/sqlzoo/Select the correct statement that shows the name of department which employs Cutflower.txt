@@ -1,0 +1,5 @@
+/* https://sqlzoo.net/wiki/Using_Null_Quiz */
+
+/* 2. Select the correct statement that shows the name of department which employs Cutflower - */
+
+SELECT dept.name FROM teacher JOIN dept ON (dept.id = teacher.dept) WHERE teacher.name = 'Cutflower'
