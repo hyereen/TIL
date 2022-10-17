@@ -1,0 +1,5 @@
+/* https://sqlzoo.net/wiki/Using_Null_Quiz */
+
+/* 3. Select out of following the code which uses a JOIN to show a list of all the departments and number of employed teachers */
+
+SELECT dept.name, COUNT(teacher.name) FROM teacher RIGHT JOIN dept ON dept.id = teacher.dept GROUP BY dept.name
