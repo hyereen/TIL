@@ -1,0 +1,33 @@
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131530
+
+/* 1. 서브쿼리에 CASE 문 만들기 */
+SELECT P.PRICEGROUP, COUNT(PRODUCT_ID) AS PRODUCTS
+  FROM (SELECT PRODUCT_ID, PRICE,
+               CASE
+               WHEN (0 <= PRICE AND PRICE < 10000) THEN 0
+               WHEN (10000 <= PRICE AND PRICE < 20000) THEN 10000
+               WHEN (20000 <= PRICE AND PRICE < 30000) THEN 20000
+               WHEN (30000 <= PRICE AND PRICE < 40000) THEN 30000
+               WHEN (40000 <= PRICE AND PRICE < 50000) THEN 40000
+               WHEN (50000 <= PRICE AND PRICE < 60000) THEN 50000
+               WHEN (60000 <= PRICE AND PRICE < 70000) THEN 60000
+               WHEN (70000 <= PRICE AND PRICE < 80000) THEN 70000
+               ELSE 80000
+               END PRICEGROUP
+         FROM PRODUCT) P
+ GROUP BY P.PRICEGROUP
+ ORDER BY P.PRICEGROUP;
+
+/* 2. 소수점 내림 이용하기 */
+SELECT
+    floor(price/10000)*10000 as price_group
+    , count(product_id)
+from product
+group by floor(price/10000)
+order by floor(price/10000) asc
+;
+/* 3. 소수점 버림 이용하기 */
+SELECT TRUNC(PRICE,-4) AS PRICE_GROUP,COUNT(*) AS PRODUCTS
+FROM PRODUCT 
+GROUP BY TRUNC(PRICE,-4)
+ORDER BY PRICE_GROUP;
