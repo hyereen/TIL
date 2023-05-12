@@ -1,0 +1,8 @@
+-- https://school.programmers.co.kr/learn/courses/30/lessons/164671
+-- WHERE 조건에서 MAX 서브쿼리로 가져오기 
+SELECT '/home/grep/src/' || A.BOARD_ID || '/' || B.FILE_ID || B.FILE_NAME || B.FILE_EXT  AS FILE_PATH
+FROM USED_GOODS_BOARD A
+   , USED_GOODS_FILE B
+WHERE A.BOARD_ID = B.BOARD_ID
+AND A.VIEWS = (SELECT MAX(VIEWS) FROM USED_GOODS_BOARD)
+ORDER BY B.FILE_ID DESC;
