@@ -1,0 +1,13 @@
+-- https://school.programmers.co.kr/learn/courses/30/lessons/132204
+SELECT  A.APNT_NO
+        , (SELECT PT_NAME FROM PATIENT WHERE PT_NO = A.PT_NO) AS PT_NAME
+        , A.PT_NO
+        , A.MCDP_CD
+        , B.DR_NAME
+        , A.APNT_YMD
+        FROM 
+(SELECT * FROM APPOINTMENT WHERE TO_CHAR(APNT_YMD, 'YYYYMMDD') = '20220413' AND APNT_CNCL_YN = 'N') A, DOCTOR B
+    WHERE A.MCDP_CD = B.MCDP_CD
+    AND A.MDDR_ID = B.DR_ID
+    AND A.MCDP_CD = 'CS'
+    ORDER BY A.APNT_YMD;
